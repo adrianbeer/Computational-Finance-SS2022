@@ -1,6 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# GROUP 26
+# NAMES: Adrian Beer, Dieu Hue Vu
+# EXERCISE 5
+
 # a)
 def log_returns(data: np.ndarray):
     l =  np.diff(np.log(data))

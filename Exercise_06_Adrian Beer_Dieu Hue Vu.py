@@ -3,6 +3,9 @@ import numpy as np
 from scipy.stats import norm
 import matplotlib.pyplot as plt
 
+# GROUP 26
+# NAMES: Adrian Beer, Dieu Hue Vu
+# EXERCISE 6
 
 def get_CRR_params(r, sigma,T, M):
     dt = T/M
@@ -58,6 +61,7 @@ K_list = np.arange(70,201,1)
 
 V_0_BS = BlackScholes_EUCall(t, S_t, r, sigma, T, K_list)
 V_0_CRR = np.array([CRR_EuCall(S_0, r, sigma, T, M, K) for K in K_list])
+print(V_0_CRR)
 error = V_0_CRR - V_0_BS
 f, (ax1, ax2) = plt.subplots(2,1, sharex=True)
 ax1.plot(K_list, error)
