@@ -1,5 +1,10 @@
+# GROUP QF 26
+# NAMES: Adrian Beer, Dieu Hue Vu
+# EXERCISE 21
+
 import numpy as np
 from scipy.stats import norm
+np.random.seed(123123)
 
 # K is redundant... f is already defined and K isn't an input
 # parameter to f (here at least).
@@ -28,10 +33,11 @@ def BlackScholes_EUCall(S0, r, sigma, T, K, *args, **kwargs):
     C = S0*(norm.cdf(d1)) - K*np.exp(-r*(T-t))*norm.cdf(d2)
     return C
 
+
 K = 100
 params = dict(K=100, f=lambda x: max([x-K, 0]), S0=110, r=0.03, sigma=0.2, T=1, M=10000)
 MC_price, (c_lower, c_upper) = Eu_Option_BS_MC(**params)
 BS_price = BlackScholes_EUCall(**params)
 print(f"MC price: {MC_price:.4f} with 95% conf interval: ({c_lower:.4f}, {c_upper:.4f})")
 print(f"BS price: {BS_price:.4f}" )
-# The option prices differ slightly.
+# The option prices differ slightly. The confidence interval is pretty large though (roughly 0.7 points).

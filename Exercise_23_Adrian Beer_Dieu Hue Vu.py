@@ -1,9 +1,14 @@
+# GROUP QF 26
+# NAMES: Adrian Beer, Dieu Hue Vu
+# EXERCISE 23
+
 import numpy as np
 from scipy.optimize import minimize_scalar
 from scipy.stats import norm
 from scipy import integrate
 from cmath import exp
 import  matplotlib.pyplot as plt
+
 
 def BlackScholes_EUCall(S0, r, sigma, T, K, *args, **kwargs):
     t = 0
@@ -30,7 +35,6 @@ print(f"BlackScholes Price: {BlackScholes_EUCall(**params, sigma=res)}")
 def Heston_EuPut_Laplace(S0, r, nu0, kappa, _lambda, sigma_tilde, T, K, R):
     def d(u): return np.sqrt(_lambda**2 + complex(u**2, u)*sigma_tilde**2)
 
-    # cosh(x) and sinh(x) explode for large Re(x), but char_func(complex(x, -R))dx gives us very large x.
     def denom_hyperb(u):
         return np.cosh(d(u)*T/2) + _lambda*np.sinh(d(u)*T/2)/d(u)
 
@@ -46,21 +50,24 @@ def Heston_EuPut_Laplace(S0, r, nu0, kappa, _lambda, sigma_tilde, T, K, R):
 
     def integrand(u): return np.real(f_tilde(complex(R, u)) * char_func(complex(u, -R)))
 
-    # Can only integrate to about 900, otherwise the terms explode
-    # and can't be evaluated properly anymore
+    # Can only integrate to about 900, otherwise the terms (those including cosh(x) and sinh(x) in particular)
+    # explode and can't be evaluated properly anymore
     integral = integrate.quad(func=integrand, a=0, b=900)[0]
     V = exp(-r*T)/np.pi*integral
     return V
 
 K_list = list(range(50, 150+1))
 params = dict(S0=100, r=0.05, nu0=0.3**2, kappa=0.3**2, _lambda=2.5, sigma_tilde=0.2,
-              T=1, R=-0.001)
+              T=1, R=-1)
 # We need to choose a negative R, because the Laplace transform of the put payoff function
 # is only defined for Re(z) < 0, i.e. R < 0.
 laplace_prices = [Heston_EuPut_Laplace(**params, K=K) for K in K_list]
-plt.plot(K_list, [laplace_prices])
+plt.plot(K_list, laplace_prices)
+plt.xlabel("K")
+plt.ylabel("Put Price")
 plt.grid()
 plt.show()
+
 
 def ImplVol_Heston(S0, r, nu0, kappa, _lambda, sigma_tilde, T, K, R):
     euput_heston_price = Heston_EuPut_Laplace(S0, r, nu0, kappa, _lambda, sigma_tilde, T, K, R)
@@ -72,4 +79,8 @@ def ImplVol_Heston(S0, r, nu0, kappa, _lambda, sigma_tilde, T, K, R):
 
 laplace_impl_vols = [ImplVol_Heston(**params, K=K) for K in K_list]
 plt.plot(K_list, laplace_impl_vols)
+plt.xlabel("K")
+plt.ylabel("Impl. Vola")
 plt.show()
+
+# We observe a volatility smile.
