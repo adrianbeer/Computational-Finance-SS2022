@@ -35,6 +35,7 @@ def Eu_Option_BS_MC(S0, r, sigma, T, M, g, K=None):
 
 
 # Function using Antithetic variables
+
 def BS_EuOption_MC_AV (S0, r, sigma, T, K=None, M=None, g=None):
     X = np.random.normal(loc=0, scale=1, size=M)
     X = np.concatenate([X, -X])  # Antithetic variables
@@ -43,6 +44,9 @@ def BS_EuOption_MC_AV (S0, r, sigma, T, K=None, M=None, g=None):
     print(f"Cov(V_hat, V_minus) = {np.cov(f_S_T[:M], f_S_T[M:])[0,1]/M:.4f}")
     avg_f_S_T = np.mean(f_S_T)
     V_0 = np.exp(-r*T)*avg_f_S_T
+    # It's the same.
+    #print(1/(2*M)*sum((f_S_T-np.mean(f_S_T))**2))
+    #print(1/(2*M)*np.sum((f_S_T[:M]+f_S_T[M:]-np.mean(f_S_T[:M]+f_S_T[M:]))**2))
 
     # Calculate confidence intervals
     alpha = 0.95
