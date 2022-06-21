@@ -6,6 +6,9 @@ from cmath import exp
 # NAMES: Adrian Beer, Dieu Hue Vu
 # EXERCISE 21
 
+'''
+Using control variables to reduce the variance of MC-estimators 
+'''
 
 def Eu_Option_Quanto_MC(S0, r, sigma, T, M, f, K=None, X=None):
     if not X is None: X = np.random.normal(loc=0, scale=1, size=M)

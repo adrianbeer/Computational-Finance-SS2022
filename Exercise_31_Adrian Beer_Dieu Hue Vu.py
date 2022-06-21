@@ -7,6 +7,10 @@ from matplotlib import pyplot as plt
 
 np.random.seed(0)
 
+'''
+Valuation of European options in the Heston model using the Euler method
+'''
+
 def generate_Heston_path(S0, r, gamma0, kappa, lambda_, sigma_tilde, T, m, *args, **kwargs):
     Y = np.ndarray(shape=(m,))
     Y[0] = S0

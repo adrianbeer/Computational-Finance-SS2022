@@ -6,6 +6,9 @@ import numpy as np
 from scipy.stats import norm
 #np.random.seed(123123)
 
+"""
+Using antithetic variables to reduce the variance of MC-estimators
+"""
 
 def BlackScholes_EUCall(S0, r, sigma, T, K, *args, **kwargs):
     t=0

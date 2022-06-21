@@ -8,8 +8,9 @@ import scipy
 import math
 from matplotlib import pyplot as plt
 
-''' Pricing a deep out-of-the-money European call option by Monte-Carlo with
-importance sampling.'''
+''' 
+Pricing a deep out-of-the-money European call option by Monte-Carlo with importance sampling
+'''
 
 def BlackScholes_EuCall(t, S_t, r, sigma, T, K, *args, **kwargs):
     d_1 = (math.log(S_t / K) + (r + 1 / 2 * math.pow(sigma, 2)) * (T - t)) / (sigma * math.sqrt(T - t))

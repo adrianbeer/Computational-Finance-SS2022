@@ -5,6 +5,9 @@
 import numpy as np
 import  matplotlib.pyplot as plt
 
+"""
+Sampling from a distribution by the acceptance/rejection method
+"""
 
 def f(x):
     # Wigner semicircle distribution with R=1

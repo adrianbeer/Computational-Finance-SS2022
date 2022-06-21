@@ -7,6 +7,10 @@ import scipy
 from scipy.stats import norm
 from functools import partial
 
+'''
+Calculating the Delta/Hedge of a European option via MC methods, infinitesimal perturbation
+'''
+
 def get_phi1_t(St, r, sigma, g, T, t, N, K):
     return norm.cdf((np.log(St/K)+r*(T-t)+sigma**2/2*(T-t))/(sigma*np.sqrt(T-t)))
 

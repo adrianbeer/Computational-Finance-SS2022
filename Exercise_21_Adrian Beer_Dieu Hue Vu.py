@@ -6,6 +6,10 @@ import numpy as np
 from scipy.stats import norm
 np.random.seed(123123)
 
+"""
+Valuation of European options in the Black-Scholes model using Monte-Carlo
+"""
+
 # K is redundant... f is already defined and K isn't an input
 # parameter to f (here at least).
 def Eu_Option_BS_MC(S0, r, sigma, T, M, f, K=None):

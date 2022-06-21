@@ -9,6 +9,9 @@ from scipy import integrate
 from cmath import exp
 import  matplotlib.pyplot as plt
 
+"""
+Implied volatility in the Heston-model
+"""
 
 def BlackScholes_EUCall(S0, r, sigma, T, K, *args, **kwargs):
     t = 0
