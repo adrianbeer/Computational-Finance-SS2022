@@ -68,16 +68,17 @@ def EuCall_BlackScholes(t, S_t, r, sigma, T, K):
 
 
 # test parameter
-S0 = 110
+S0 = 100
 r = 0.03
 sigma = 0.2
-T = 1
-K = 220
+T = 3
+K = 120
 N = 10000
 alpha = 0.95
 
 # compute optimal mu
 d = (math.log(K / S0) - ((r - (1 / 2) * math.pow(sigma, 2)) * T)) / (sigma * math.sqrt(T))
+print(d)
 delta = abs(d)
 # define range for mu
 mu = np.arange(0, 2 * delta, 0.01)

@@ -81,12 +81,14 @@ r = 0.05
 sigma = 0.2
 a = -0.7
 b = 0.4
-m = 100
-nu_max = 2000
-T = 1
+m = 500
+nu_max = 500
+T = 5
 K = 100
 
 [S, V] = BS_EuCall_FiDi_CN(r, sigma, a, b, m, nu_max, T, K)
+
+[S, V_2] = BS_EuCall_FiDi_CN(r, sigma, a, b, m, nu_max*2, T, K)
 
 
 ### BS-Formula
@@ -107,3 +109,11 @@ plt.plot(S, V, label='Price with finite difference scheme')
 plt.plot(S, V_BS, label='Price with BS-Formula')
 plt.legend()
 plt.show()
+
+plt.plot(V - V_BS, label="normal")
+plt.plot((2*V_2 - V) - V_BS, label="linear")
+plt.plot((4*V_2 - V)/3 - V_BS, label="qudratic")
+plt.legend()
+plt.show()
+
+#print(V-V_2)

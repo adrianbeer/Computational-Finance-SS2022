@@ -56,7 +56,7 @@ r = 0.03
 sigma = 0.3
 T = 1
 K = range(70, 201, 1)
-M = 100
+M = 1000
 
 V_0 = np.empty(131, dtype=float)
 V_0_BS = np.empty(131, dtype=float)
